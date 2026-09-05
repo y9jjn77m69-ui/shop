@@ -472,6 +472,17 @@ footer{background:rgba(6,6,6,.85);border-top:1px solid #d4537e;padding:2rem 1rem
     <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol>
     <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
     <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-keychain" viewBox="0 0 100 100">
+      <circle cx="50" cy="15" r="9" fill="none" stroke="url(#pinkgrad)" stroke-width="4"/>
+      <path d="M50 24 L50 33" stroke="url(#pinkgrad)" stroke-width="3.5" stroke-linecap="round"/>
+      <ellipse cx="50" cy="60" rx="24" ry="27" fill="url(#pinkgrad)"/>
+      <path d="M34 40 C31 32, 33 27, 38 30 C40 33, 39 38, 37 42 Z" fill="#ff2d8f"/>
+      <path d="M66 40 C69 32, 67 27, 62 30 C60 33, 61 38, 63 42 Z" fill="#ff2d8f"/>
+      <path d="M40 58 C42 53, 47 53, 48 58" stroke="#0a0508" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M53 58 C54 53, 59 53, 61 58" stroke="#0a0508" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M50 68 C46 64, 41 67, 44 72 C46 75, 50 78, 50 78 C50 78, 54 75, 56 72 C59 67, 54 64, 50 68 Z" fill="#fff" opacity="0.85"/>
+      <ellipse cx="50" cy="52" rx="18" ry="8" fill="#fff" opacity="0.15"/>
+    </symbol>
     <symbol id="i-tweezer" viewBox="0 0 100 100">
       <path d="M50 6 C46 6 44 9 44 13 L36 62 C34 74 40 86 50 92 C60 86 66 74 64 62 L56 13 C56 9 54 6 50 6 Z" fill="url(#pinkgrad)"/>
       <path d="M50 10 C48 10 47 11 47 13 L40 62 C38 72 43 82 50 88 L50 10 Z" fill="#ffffff" opacity="0.22"/>
@@ -628,7 +639,7 @@ footer{background:rgba(6,6,6,.85);border-top:1px solid #d4537e;padding:2rem 1rem
 <!-- KLEBER -->
 <div class="page info" id="page-kleber">
   <div class="sec-title">Kleber &amp; Zubeh&ouml;r</div>
-  <div class="sec-sub">2 Produkte</div>
+  <div class="sec-sub">3 Produkte</div>
   <div class="grid" id="gridZub"></div>
 </div>
 
@@ -806,14 +817,17 @@ const P=[
  d:'Die absolute Drama-Queen! Volumin\u00f6s, flauschig und unglaublich texturiert. Diese Luxus-Mink-Lashes sind so wild und \u00fcppig, dass jeder Blick z\u00e4hlt.',p:18.40},
 {n:"The Devil's Kit",c:'KIT',cat:'set',mood:'drama',tag:'EXKLUSIV',art:'kit',mat:'Geschenkset',vol:'Komplett-Set',laenge:'5 Teile',anlass:'Geschenk & Einsteigerinnen',
  s:'Everything you need for your sinful look.',
- d:'Dein komplettes Ritual in einer glossy Box: ein Paar Signature-Lashes, eine Applikator-Pinzette, Lash Glue, ein kleiner Luxus-Spiegel \u2013 den es NUR in diesem Kit gibt \u2013 und dein eigener Devil-Angel-Anh\u00e4nger. Verpackt in schwarz-pinker Hochglanzbox mit H\u00f6rnchen.',p:39.90,
+ d:'Dein komplettes Ritual in einer glossy Box: ein Paar Signature-Lashes, eine Applikator-Pinzette, Lash Glue, ein kleiner Luxus-Spiegel \u2013 den es NUR in diesem Kit gibt \u2013 und dein eigener Devil-Angel-Anh\u00e4nger. Verpackt in schwarz-pinker Hochglanzbox mit H\u00f6rnchen.',p:39.20,
  items:['1 Paar Signature-Lashes deiner Wahl','1 Applikator-Pinzette in Ros\u00e9gold','1 Lash Glue','1 Luxus-Spiegel \u2013 exklusiv im Kit','1 Devil-Angel Maskottchen-Anh\u00e4nger']},
 {n:'Sinful Grip',c:'GLUE',cat:'zubehoer',mood:'zubehoer',tag:'MUST-HAVE',art:'glu',mat:'Wimpernkleber',vol:'5 ml',laenge:'H\u00e4lt 12\u201316 Std.',anlass:'Zu jedem Lash-Style',
  s:'H\u00e4lt alles \u2013 ausser deine guten Vors\u00e4tze.',
  d:'Unser Lash Glue trocknet klar, ist latexfrei und h\u00e4lt den ganzen Tag bis in die Nacht. Der feine Pinselaufsatz macht das Auftragen sauber und einfach \u2013 auch wenn du zum ersten Mal klebst.',p:9.90},
 {n:'Devil\u2019s Touch',c:'TWZ',cat:'zubehoer',mood:'zubehoer',tag:'',art:'twz',mat:'Edelstahl, ros\u00e9vergoldet',vol:'Gebogene Spitze',laenge:'11 cm',anlass:'Pr\u00e4zises Aufsetzen',
  s:'Weil zittrige Finger keine Wimpern setzen.',
- d:'Die gebogene Applikator-Pinzette in Ros\u00e9gold h\u00e4lt dein Wimpernband genau dort, wo es hin soll. Leicht, rutschfest und so h\u00fcbsch, dass sie auf deinem Schminktisch liegen bleiben darf.',p:8.90}
+ d:'Die gebogene Applikator-Pinzette in Ros\u00e9gold h\u00e4lt dein Wimpernband genau dort, wo es hin soll. Leicht, rutschfest und so h\u00fcbsch, dass sie auf deinem Schminktisch liegen bleiben darf.',p:8.90},
+{n:'Little Devil Charm',c:'CHARM',cat:'zubehoer',mood:'zubehoer',tag:'HANDMADE',art:'key',mat:'3D-Druck, handgefertigt',vol:'ca. 5 cm',laenge:'mit Schl\u00fcsselring',anlass:'Tasche, Schl\u00fcssel & Geschenke',
+ s:'Dein kleiner Devil-Angel \u2013 immer dabei.',
+ d:'Unser Maskottchen als Schl\u00fcsselanh\u00e4nger, von Kardi selbst am 3D-Drucker gefertigt. Jedes St\u00fcck wird einzeln gedruckt \u2013 kleine Unterschiede geh\u00f6ren dazu und machen deinen zum Unikat.',p:6.00}
 ];
 
 let filter='alle', cart=[], qty=1, current=0;
@@ -860,7 +874,8 @@ const LASH='<svg class="lashicon"><use href="#i-lash"/></svg>';
 const KIT='<svg class="lashicon kiticon"><use href="#i-kit"/></svg>';
 const TWZ='<svg class="lashicon kiticon"><use href="#i-tweezer"/></svg>';
 const GLU='<svg class="lashicon kiticon"><use href="#i-glue"/></svg>';
-const ART=p=>p.art==='kit'?KIT:p.art==='twz'?TWZ:p.art==='glu'?GLU:LASH;
+const KEY='<svg class="lashicon kiticon"><use href="#i-keychain"/></svg>';
+const ART=p=>p.art==='kit'?KIT:p.art==='twz'?TWZ:p.art==='glu'?GLU:p.art==='key'?KEY:LASH;
 
 function card(p,i){
   return '<div class="card" onclick="openDetail('+i+')">'+
@@ -882,7 +897,7 @@ function renderProducts(){
   document.getElementById('gridAll').innerHTML=list.map(({p,i})=>card(p,i)).join('')||'<p style="font-size:12px;color:#9b8f95">Keine Produkte gefunden.</p>';
   document.getElementById('count').textContent=list.length;
   document.getElementById('gridSets').innerHTML=card(P[6],6);
-  document.getElementById('gridZub').innerHTML=card(P[7],7)+card(P[8],8);
+  document.getElementById('gridZub').innerHTML=card(P[7],7)+card(P[8],8)+card(P[9],9);
   document.getElementById('gridHome').innerHTML=[6,0,7,4].map(i=>card(P[i],i)).join('');
 }
 
