@@ -926,10 +926,10 @@ function openDetail(i){
     '<button class="dt-buy shine" onclick="add(event,'+i+',qty)">In den Warenkorb</button>'+
     '<div class="specs">'+
       '<div class="spec"><b>Material</b><span>'+p.mat+'</span></div>'+
-      '<div class="spec"><b>Volumen</b><span>'+p.vol+'</span></div>'+
-      '<div class="spec"><b>L\u00e4nge</b><span>'+p.laenge+'</span></div>'+
+      '<div class="spec"><b>'+(p.art?'Gr\u00f6\u00dfe':'Volumen')+'</b><span>'+p.vol+'</span></div>'+
+      '<div class="spec"><b>'+(p.art?'Details':'L\u00e4nge')+'</b><span>'+p.laenge+'</span></div>'+
       '<div class="spec"><b>Perfekt f\u00fcr</b><span>'+p.anlass+'</span></div>'+
-      '<div class="spec"><b>Wiederverwendbar</b><span>ca. 15\u201320 mal</span></div>'+
+      (p.art?'':'<div class="spec"><b>Wiederverwendbar</b><span>ca. 15\u201320 mal</span></div>')+
     '</div>';
   go('detail');
 }
