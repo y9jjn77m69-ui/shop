@@ -446,6 +446,18 @@ footer{background:rgba(6,6,6,.85);border-top:1px solid #d4537e;padding:2rem 1rem
 .faqcat{font-size:10px;letter-spacing:2.5px;color:#ff6fa5;font-weight:800;margin:1.4rem 0 .6rem}
 .faqcat:first-child{margin-top:0}
 @media (min-width:760px){#page-faq{max-width:760px}.faqq{font-size:15px}.faqa p{font-size:14px}}
+
+@keyframes glitterRain{
+  0%{opacity:0;transform:translateY(-40px) rotate(0deg) scale(.5)}
+  10%{opacity:1}
+  85%{opacity:1}
+  100%{opacity:0;transform:translateY(105vh) rotate(320deg) scale(.9)}
+}
+.rainstar{position:fixed;top:-40px;z-index:480;pointer-events:none;
+  background:radial-gradient(circle,#fff 0%,#ffd9e8 30%,#ff2d8f 65%,rgba(255,45,143,0) 80%);
+  clip-path:polygon(50% 0%,60% 40%,100% 50%,60% 60%,50% 100%,40% 60%,0% 50%,40% 40%);
+  filter:drop-shadow(0 0 6px rgba(255,45,143,.8));
+  animation:glitterRain linear forwards}
 </style>
 </head>
 <body>
@@ -552,6 +564,7 @@ footer{background:rgba(6,6,6,.85);border-top:1px solid #d4537e;padding:2rem 1rem
     <div class="smcat">SHOP</div>
     <button onclick="menuGo('home')">Home</button>
     <button onclick="menuGo('lashes')">Alle Lashes</button>
+    <button onclick="menuGo('mink')">Mink Lashes</button>
     <button onclick="menuGo('kleber')">Kleber &amp; Zubeh&ouml;r</button>
     <button onclick="menuGo('sets')">Sets &amp; Kits</button>
 
@@ -564,6 +577,7 @@ footer{background:rgba(6,6,6,.85);border-top:1px solid #d4537e;padding:2rem 1rem
     <button onclick="closeMenu();openAccount()" id="smAccount">Anmelden / Registrieren</button>
 
     <div class="smcat">SERVICE</div>
+    <button onclick="menuGo('ueber')">&Uuml;ber mich</button>
     <button onclick="menuGo('faq')">FAQ</button>
     <button onclick="menuGo('versand')">Versand &amp; Lieferung</button>
     <button onclick="menuGo('kontakt')">Kontakt</button>
@@ -637,6 +651,13 @@ footer{background:rgba(6,6,6,.85);border-top:1px solid #d4537e;padding:2rem 1rem
 </div>
 
 <!-- KLEBER -->
+<div class="page" id="page-mink">
+  <div class="sec-title">Mink Lashes</div>
+  <div class="sec-sub">2 Produkte &middot; unsere Luxus-Linie</div>
+  <div class="box" style="margin-bottom:1.2rem"><p>Mink-Lashes sind weicher, leichter und behalten ihre Form l&auml;nger als synthetische. Sie fallen nat&uuml;rlicher und halten bei guter Pflege am l&auml;ngsten.</p></div>
+  <div class="grid" id="gridMink"></div>
+</div>
+
 <div class="page info" id="page-kleber">
   <div class="sec-title">Kleber &amp; Zubeh&ouml;r</div>
   <div class="sec-sub">3 Produkte</div>
@@ -706,6 +727,31 @@ footer{background:rgba(6,6,6,.85);border-top:1px solid #d4537e;padding:2rem 1rem
 </div>
 
 <!-- KONTAKT -->
+<div class="page info" id="page-ueber">
+  <div class="sec-title">&Uuml;ber mich</div>
+  <div class="sec-sub">Die Frau hinter Sinfullashes</div>
+
+  <div class="box">
+    <p>Hi, ich bin <b style="color:#ff2d8f">Kardi</b> &ndash; Gr&uuml;nderin von Sinfullashes und Mama eines kleinen Wirbelwinds.</p>
+  </div>
+
+  <h3>Wie alles begann</h3>
+  <p>Sinfullashes ist aus einer ganz einfachen Idee entstanden: Ich wollte Wimpern, die man selbst aufsetzen kann &ndash; ohne Termin, ohne Studio, ohne stundenlang stillzuhalten. Wimpern, die sich luxuri&ouml;s anf&uuml;hlen, aber in den Alltag passen.</p>
+
+  <h3>Wof&uuml;r ich stehe</h3>
+  <p>Jeder Style in meinem Shop ist von mir pers&ouml;nlich ausgesucht &ndash; nichts ist zuf&auml;llig dabei. Von <i>Wicked Wispy</i> f&uuml;r jeden Tag bis <i>Wild Mink</i>, wenn alle hinschauen sollen: Es gibt f&uuml;r jede Stimmung den passenden Blick.</p>
+  <p>Jede Bestellung packe ich selbst, von Hand. Und wenn du eine Frage hast, schreibst du nicht mit einem Callcenter &ndash; sondern mit mir.</p>
+
+  <div class="tipbox"><b>MEIN VERSPRECHEN</b><p>Ehrliche Produkte, ehrliche Beratung. Wenn ein Style nicht zu dir passt, sage ich dir das lieber, als dir etwas zu verkaufen, das dann in der Schublade landet.</p></div>
+
+  <h3>Be sinful, be you</h3>
+  <p>Dieser Satz ist mehr als ein Slogan. Es geht nicht darum, wie andere finden, dass du auszusehen hast. Es geht darum, dass du dich in deinem eigenen Blick wiedererkennst &ndash; ob s&uuml;ss, dramatisch oder irgendwo dazwischen.</p>
+
+  <div class="box">
+    <p>Fragen? Schreib mir jederzeit per WhatsApp oder &uuml;ber das <span style="color:#ff6fa5;cursor:pointer" onclick="go('kontakt')">Kontaktformular</span>. Ich antworte innerhalb von 24 Stunden. &#10022;</p>
+  </div>
+</div>
+
 <div class="page info" id="page-faq">
   <div class="sec-title">Häufige Fragen</div>
   <div class="sec-sub">Alles, was du vor dem Kauf wissen willst</div>
@@ -761,6 +807,7 @@ footer{background:rgba(6,6,6,.85);border-top:1px solid #d4537e;padding:2rem 1rem
       <button onclick="go('kleber')">Kleber</button>
       <button onclick="go('sets')">Sets</button></div>
     <div><div class="ftitle">SERVICE</div>
+      <button onclick="go('ueber')">&Uuml;ber mich</button>
       <button onclick="go('anleitung')">Aufsetzen &amp; Pflege</button>
       <button onclick="go('faq')">FAQ</button>
       <button onclick="go('versand')">Versand</button>
@@ -897,6 +944,7 @@ function renderProducts(){
   document.getElementById('gridAll').innerHTML=list.map(({p,i})=>card(p,i)).join('')||'<p style="font-size:12px;color:#9b8f95">Keine Produkte gefunden.</p>';
   document.getElementById('count').textContent=list.length;
   document.getElementById('gridSets').innerHTML=card(P[6],6);
+  document.getElementById('gridMink').innerHTML=card(P[4],4)+card(P[5],5);
   document.getElementById('gridZub').innerHTML=card(P[7],7)+card(P[8],8)+card(P[9],9);
   document.getElementById('gridHome').innerHTML=[6,0,7,4].map(i=>card(P[i],i)).join('');
 }
@@ -1150,6 +1198,24 @@ function sparkleBurst(){
 renderProducts();updateCart();updateFavs();renderAccount();
 
 // Willkommens-Popup vorübergehend deaktiviert – wird durch neuen Begrüssungstext ersetzt
+function glitterRain(count){
+  for(let i=0;i<count;i++){
+    const s=document.createElement('div');
+    s.className='rainstar';
+    const size=6+Math.random()*14;
+    s.style.width=size+'px';
+    s.style.height=size+'px';
+    s.style.left=(Math.random()*100)+'vw';
+    s.style.animationDuration=(2.4+Math.random()*2.6)+'s';
+    s.style.animationDelay=(Math.random()*2.2)+'s';
+    s.style.opacity=(.5+Math.random()*.5);
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),7000);
+  }
+}
+
+// Glitzerregen bei jedem Besuch
+setTimeout(()=>glitterRain(70),400);
 </script>
 </body>
 </html>
