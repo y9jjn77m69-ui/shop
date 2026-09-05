@@ -320,6 +320,23 @@ footer{background:rgba(6,6,6,.85);border-top:1px solid #d4537e;padding:2rem 1rem
 @media (min-width:1100px){
   .grid{grid-template-columns:repeat(4,1fr)}
 }
+
+@keyframes heartPop{0%{transform:translate(-50%,0) scale(.3);opacity:0}
+  25%{transform:translate(-50%,-14px) scale(1.25);opacity:1}
+  100%{transform:translate(-50%,-70px) scale(.85);opacity:0}}
+.heartfly{position:fixed;pointer-events:none;z-index:420;font-size:0;animation:heartPop 1s ease-out forwards}
+.heartfly svg{width:30px;height:30px;fill:#ff2d8f;filter:drop-shadow(0 0 12px rgba(255,45,143,.9))}
+.likebtn{position:absolute;top:7px;right:7px;width:32px;height:32px;border-radius:50%;
+  background:rgba(0,0,0,.55);border:1px solid #6b2a45;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:5;transition:.2s;backdrop-filter:blur(3px)}
+.likebtn svg{width:16px;height:16px;stroke:#ff9ec9;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.likebtn.on{border-color:#ff2d8f;background:rgba(255,45,143,.25)}
+.likebtn.on svg{fill:#ff2d8f;stroke:#ff2d8f;filter:drop-shadow(0 0 8px rgba(255,45,143,.9))}
+.likebtn:active{transform:scale(.85)}
+.detail-img .likebtn{width:44px;height:44px;top:12px;right:12px}
+.detail-img .likebtn svg{width:22px;height:22px}
+.emptyfav{text-align:center;padding:2.5rem 1rem;font-size:13px;color:#a8879a;line-height:1.8}
+.emptyfav svg{width:44px;height:44px;stroke:#6b2a45;fill:none;stroke-width:1.6;margin-bottom:1rem}
 </style>
 </head>
 <body>
@@ -383,8 +400,8 @@ footer{background:rgba(6,6,6,.85);border-top:1px solid #d4537e;padding:2rem 1rem
       <div class="wordmark" onclick="go('home')">SIN<i>FUL</i>LASHES<small>BE SINFUL, BE YOU</small></div>
     </div>
     <div class="icons">
-      <div class="icon"><svg><use href="#i-user"/></svg></div>
-      <div class="icon"><svg><use href="#i-heart"/></svg></div>
+      <div class="icon" title="Kontakt" onclick="go('kontakt')"><svg><use href="#i-user"/></svg></div>
+      <div class="icon" title="Favoriten" onclick="go('favoriten')"><svg><use href="#i-heart"/></svg><div class="badge" id="favbadge" style="background:#ff2d8f">0</div></div>
       <div class="icon" onclick="openCart()"><svg><use href="#i-cart"/></svg><div class="badge" id="badge">0</div></div>
     </div>
   </div>
@@ -447,6 +464,14 @@ footer{background:rgba(6,6,6,.85);border-top:1px solid #d4537e;padding:2rem 1rem
 <div class="page" id="page-detail">
   <button class="back" onclick="go('lashes')"><svg><use href="#i-back"/></svg> Zur&uuml;ck zu allen Lashes</button>
   <div id="detail"></div>
+</div>
+
+<!-- FAVORITEN -->
+<div class="page" id="page-favoriten">
+  <div class="sec-title">Deine Favoriten</div>
+  <div class="sec-sub"><span id="favcount">0</span> gemerkte Produkte</div>
+  <div class="grid" id="gridFav"></div>
+  <div id="favEmpty"></div>
 </div>
 
 <!-- QUIZ -->
@@ -512,6 +537,7 @@ footer{background:rgba(6,6,6,.85);border-top:1px solid #d4537e;padding:2rem 1rem
     <div><div class="ftitle">SERVICE</div>
       <button onclick="go('versand')">Versand</button>
       <button onclick="go('kontakt')">Kontakt</button>
+      <button onclick="go('favoriten')">Favoriten</button>
       <button onclick="toast('AGB folgen')">AGB &amp; Impressum</button></div>
   </div>
   <div class="pay"><span>TWINT</span><span>VISA</span><span>MASTERCARD</span><span>PAYPAL</span><span>RECHNUNG</span></div>
@@ -570,6 +596,43 @@ const P=[
 
 let filter='alle', cart=[], qty=1, current=0;
 
+let favs=[];
+try{const st=localStorage.getItem('sl_favs');if(st)favs=JSON.parse(st);}catch(e){}
+function saveFavs(){try{localStorage.setItem('sl_favs',JSON.stringify(favs));}catch(e){}}
+
+const HEART='<svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.7-7.5-9.9A4.2 4.2 0 0 1 12 7.7a4.2 4.2 0 0 1 7.5 2.9c0 5.2-7.5 9.9-7.5 9.9z"/></svg>';
+
+function likeBtn(i){
+  return '<div class="likebtn'+(favs.includes(i)?' on':'')+'" onclick="event.stopPropagation();toggleFav('+i+',this)" title="Merken">'+HEART+'</div>';
+}
+
+function toggleFav(i,btn){
+  const k=favs.indexOf(i);
+  if(k>=0){favs.splice(k,1);btn.classList.remove('on');toast(P[i].n+' aus Favoriten entfernt');}
+  else{favs.push(i);btn.classList.add('on');flyHeart(btn);sparkle(btn);toast(P[i].n+' gemerkt');}
+  saveFavs();updateFavs();
+}
+
+function flyHeart(el){
+  const r=el.getBoundingClientRect();
+  for(let k=0;k<3;k++){
+    const d=document.createElement('div');
+    d.className='heartfly';d.innerHTML=HEART;
+    d.style.left=(r.left+r.width/2+(k-1)*16)+'px';
+    d.style.top=(r.top)+'px';
+    d.style.animationDelay=(k*0.09)+'s';
+    document.body.appendChild(d);setTimeout(()=>d.remove(),1200);
+  }
+}
+
+function updateFavs(){
+  document.getElementById('favbadge').textContent=favs.length;
+  const g=document.getElementById('gridFav'), e=document.getElementById('favEmpty');
+  document.getElementById('favcount').textContent=favs.length;
+  if(favs.length){g.innerHTML=favs.map(i=>card(P[i],i)).join('');e.innerHTML='';}
+  else{g.innerHTML='';e.innerHTML='<div class="emptyfav"><svg viewBox="0 0 24 24"><path d="M12 20.5s-7.5-4.7-7.5-9.9A4.2 4.2 0 0 1 12 7.7a4.2 4.2 0 0 1 7.5 2.9c0 5.2-7.5 9.9-7.5 9.9z" stroke-linejoin="round"/></svg><br>Noch nichts gemerkt.<br>Tippe auf das Herz bei einem Produkt,<br>dann findest du es hier wieder.</div>';}
+}
+
 const LASH='<svg class="lashicon"><use href="#i-lash"/></svg>';
 const KIT='<svg class="lashicon kiticon"><use href="#i-kit"/></svg>';
 const TWZ='<svg class="lashicon kiticon"><use href="#i-tweezer"/></svg>';
@@ -578,7 +641,7 @@ const ART=p=>p.art==='kit'?KIT:p.art==='twz'?TWZ:p.art==='glu'?GLU:LASH;
 
 function card(p,i){
   return '<div class="card" onclick="openDetail('+i+')">'+
-   '<div class="img">'+(p.tag?'<div class="tag">'+p.tag+'</div>':'')+ART(p)+'</div>'+
+   '<div class="img">'+(p.tag?'<div class="tag">'+p.tag+'</div>':'')+likeBtn(i)+ART(p)+'</div>'+
    '<div class="body">'+
      '<div class="pn">'+p.n+'</div>'+
      '<div class="pq">\u201c'+p.s+'\u201d</div>'+
@@ -614,7 +677,7 @@ function openDetail(i){
   current=i;qty=1;
   const p=P[i];
   document.getElementById('detail').innerHTML=
-    '<div class="detail-img">'+(p.tag?'<div class="tag">'+p.tag+'</div>':'')+ART(p)+'</div>'+
+    '<div class="detail-img">'+(p.tag?'<div class="tag">'+p.tag+'</div>':'')+likeBtn(i)+ART(p)+'</div>'+
     '<div class="dt-name">'+p.n+'</div>'+
     '<div class="dt-code">STYLE '+p.c+'</div>'+
     '<div class="dt-quote">\u201c'+p.s+'\u201d</div>'+
@@ -764,7 +827,7 @@ function sparkleBurst(){
   }
 }
 
-renderProducts();updateCart();
+renderProducts();updateCart();updateFavs();
 </script>
 </body>
 </html>
